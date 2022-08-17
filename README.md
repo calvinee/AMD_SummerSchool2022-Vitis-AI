@@ -39,11 +39,11 @@ The single-stage YOLO [1, 2, 3] series of detection networks integrates target l
 
 This project uses the YOLOV3 algorithm as a multi-target detection algorithm. Experiments have shown that when YOLOV3 and YOLOV3 detect objects on KV260, the former is slower and more accurate than the latter. Since "Campus-WalkerCam" does not require high speed, but requires higher accuracy, YOLOv3 is selected as the detection network of "Campus-WalkerCam". The following figure is the network structure diagram of YOLOV3.
 
-![the network structure diagram of YOLOV3](img/2.jpg)
+![image Text](img/2.jpg)
 * Reference paper:Redmon, Joseph, and Ali Farhadi. “Yolov3: An incremental improvement.” arXiv preprint arXiv:1804.02767 (2018).
 
 Introduction to Kria KV260 Vision AI and related
-![Kria KV260 Vision AI Starter Kit Physical Image](img/3.jpg)
+![image Text](img/3.jpg)
 
 AMD-Xilinx released the Kria Adaptive Module SOM in 2021, which makes hardware-accelerated application development and application deployment easier. In the hardware application development of this project, Kria KV260 Vision AI Starter Kit, Kria™ Apps on the Xilinx App Store, Kria™ K26 SOM are mainly used, among which the most important for this project is IVAS (a new intelligent video analysis software framework ), the reference content can be read Mario Bergeron's article "Introducing Xilinx Kria™ for Vision AI Applications", web link: https://www.hackster.io/AlbertaBeef/introducing-xilinx-kria-for-vision-ai-applications-819148#overview
 AMD-Xilinx® Vitis™ AI is a development kit for AI inference on AMD-Xilinx hardware platforms. It consists of optimized DPU IP cores, AI libraries, AI Profiler, AI Quantizer and AI Optimizer tools, AI Model Zoo pre-optimized models. It was designed with efficiency and ease of use in mind, fully exploiting the potential of AI acceleration on Xilinx FPGAs and ACAPs. Currently KV260 AI-model supports YOLOV2, YOLOV3, FACEDETECT, CLASSFICATION, SSD, REID, REFINEDET, TFSSD.
@@ -68,14 +68,14 @@ docker pull xilinx/vitis-ai-cpu:1.4.916
 ./docker_run.sh xilinx/vitis-ai-cpu:1.4.916
 --
 The following screen will appear:
-![Vits-AI gui](img/4.jpg)
+![image Text](img/4.jpg)
 Later steps need to be run on TensorFlow 1.15 Workflows
 Command Line：
 --
 conda activate vitis-ai-tensorflow
 --
 The following screen will appear:
-![step](img/5.jpg)
+![image Text](img/5.jpg)
 
 * # Converting parameter formats using DW2TF projects
 
