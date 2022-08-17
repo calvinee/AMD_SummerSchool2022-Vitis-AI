@@ -2,7 +2,7 @@
 Campus-WalkerCam: Multi-object Detection System
 
 * Author : 
-* Enlish name : Calvin Shi, Hao Ren
+* Enlish name : KS Shi, Hao Ren
 * Chinese name: 时凯胜，任昊
 * Team: AMD_SummerSchool2022 of 7th team
 * University: Shaanxi University of Science ＆ Technology
