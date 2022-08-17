@@ -43,7 +43,7 @@ This project uses the YOLOV3 algorithm as a multi-target detection algorithm. Ex
 * Reference paper:Redmon, Joseph, and Ali Farhadi. “Yolov3: An incremental improvement.” arXiv preprint arXiv:1804.02767 (2018).
 
 Introduction to Kria KV260 Vision AI and related
-![image Text](img/3.jpg)
+![image Text](img/3.png)
 
 AMD-Xilinx released the Kria Adaptive Module SOM in 2021, which makes hardware-accelerated application development and application deployment easier. In the hardware application development of this project, Kria KV260 Vision AI Starter Kit, Kria™ Apps on the Xilinx App Store, Kria™ K26 SOM are mainly used, among which the most important for this project is IVAS (a new intelligent video analysis software framework ), the reference content can be read Mario Bergeron's article "Introducing Xilinx Kria™ for Vision AI Applications", web link: https://www.hackster.io/AlbertaBeef/introducing-xilinx-kria-for-vision-ai-applications-819148#overview
 AMD-Xilinx® Vitis™ AI is a development kit for AI inference on AMD-Xilinx hardware platforms. It consists of optimized DPU IP cores, AI libraries, AI Profiler, AI Quantizer and AI Optimizer tools, AI Model Zoo pre-optimized models. It was designed with efficiency and ease of use in mind, fully exploiting the potential of AI acceleration on Xilinx FPGAs and ACAPs. Currently KV260 AI-model supports YOLOV2, YOLOV3, FACEDETECT, CLASSFICATION, SSD, REID, REFINEDET, TFSSD.
@@ -68,14 +68,14 @@ docker pull xilinx/vitis-ai-cpu:1.4.916
 ./docker_run.sh xilinx/vitis-ai-cpu:1.4.916
 --
 The following screen will appear:
-![image Text](img/4.jpg)
+![image Text](img/4.png)
 Later steps need to be run on TensorFlow 1.15 Workflows
 Command Line：
 --
 conda activate vitis-ai-tensorflow
 --
 The following screen will appear:
-![image Text](img/5.jpg)
+![image Text](img/5.png)
 
 * # Converting parameter formats using DW2TF projects
 
@@ -210,37 +210,37 @@ python3 main.py \
 --gpu 0
 --
 At this point, checkpoint, yolov3.ckpt.data-00000-of-00001, yolov3.ckpt.index, yolov3.ckpt.meta, yolov3.pb will be generated, as shown in the following figure:
-![step](img/6.jpg)
+![step](img/6.png)
 
 * # Build a frozen graph
 Check out Chapter 3: Quantizing the Model of ug1414-vitis-ai.pdf, and prepare the following three files before running vai_q_tensorflow.
-![step](img/7.jpg)
+![step](img/7.png)
 The command to build the frozen graph is as follows:
-![step](img/8.jpg)
+![step](img/8.png)
 Let's start building the frozen graph:
-![Netron.app interface](img/9.jpg)
+![Netron.app interface](img/9.png)
 
 First, check the structure of the Yolov3 network in this project through https://netron.app/, open yolov3.pb, and you can see the following screen:
-![step](img/9.jpg)
-![step](img/10.jpg)
+![step](img/9.png)
+![step](img/10.png)
 The first layer of the network shows: yolov3-416/net1
-![step](img/11.jpg)
-![step](img/12.jpg)
+![step](img/11.png)
+![step](img/12.png)
 The last layer of the network shows: yolov3-416/convolutional75/BiasAdd
 Create a new folder /Vitis AI 1.4/pre_project/Darknet2Tensorflow/yolov3/convolutional75/BiasAdd and enter the following command to generate frozen_graph.pb.
 --
 freeze_graph --input_graph yolov3/yolov3.pb --input_checkpoint yolov3/yolov3.ckpt --output_graph frozen/frozen_graph.pb --output_node_names  yolov3-416/convolutional75/BiasAdd --input_binary true
 --
-![step](img/13.jpg)
+![step](img/13.png)
 After the above steps you will get frozen_graph.pb
-![step](img/14.jpg)
+![step](img/14.png)
 * # Quantize
 According to Chapter 3: Quantizing the Model of ug1414-vitis-ai.pdf, the quantization process for running vai_q_tensorflow is shown in the figure.
-![step](img/15.jpg)
+![step](img/15.png)
 To run quantization on tensorflow, prepare frozen_graph.pb, input_fn, input_nodes, and output_nodes in advance, where frozen_graph.pb is the previously frozen network structure, input_fn can perform image preprocessing, input_nodes is the name list of the input quantization starting point of the quantization graph, output_nodes is a list of names of input quantization endpoints for the quantization graph.
 Here you need to build calibration.py, the code here refers to hdcoe's article "Running Yolov2-tiny on KV260", first prepare the calibration dataset VOC2007/IPEGImages, and put the VOC dataset into the Vitis-AI 1.4/data/ folder inside. The calibration.py script modifies dataset_path, inputsize, and input_node according to this project.
 It can also be rewritten according to the pseudo-code example in the following figure:
-![step](img/16.jpg)
+![step](img/16.png)
 * # calibration.py of Code：
 --
 import os
@@ -299,14 +299,14 @@ In this project, enter the following commands under the docker of Vitis AI 1.4:
 vai_q_tensorflow quantize --input_frozen_graph frozen/frozen_graph.pb --input_fn calibration.calib_input --output_dir quantize/ --input_nodes yolov3-416/net1 --output_nodes yolov3-416/convolutional75/BiasAdd --input_shapes ?,608,608,3 --calib_iter 100
 --
 Then the following image appears:
-![step](img/17.jpg)
+![step](img/17.png)
 Finally generate quantize_eval_model: quantize/quantize_eval_model.pb
-![step](img/18.jpg)
+![step](img/18.png)
 Compile the network model of Campus-WalkerCam
 
 This project uses the Vitis™ AI Compiler (VAI_C), VAI_C acts as a unified interface for a family of compilers dedicated to performing optimizations on neural network computations for the DPU family, each compiler can map a single network model to a single highly optimized DPU instruction sequence. The XIR toolchain can perform more efficient DPU compilation and deployment on the FPGA.
 According to Chapter 5: Compilling the Model of ug1414-vitis-ai.pdf, the project compilation under Tensorflow needs to prepare quantize_eval_model.pb, arch.json, and finally get netname_org.xmodel, meta.json and md5sum.txt. The statement used is as follows:
-![step](img/19.jpg)
+![step](img/19.png)
 --
 {
     "fingerprint":"0x1000020F6014406"
@@ -326,10 +326,10 @@ sudo ./docker_run.sh xilinx/vitis-ai-cpu:1.4.916
 vai_c_caffe -p ./deploy.prototxt -c deploy.caffemodel -a arch.json
 --
 就可以看见以下画面：
-![step](img/19.jpg)
+![step](img/19.png)
 经过几分钟等待就可以生成xmodel文件和看到下面画面：
-![step](img/20.jpg)
-![step](img/21.jpg)
+![step](img/20.png)
+![step](img/21.png)
 And the deeploy.xmodel and the deeploy.prototxt were renamed yolov3-voc.xmodel and yolov3-voc.prototxt.
 Building applications on KV260
 The configuration files required to build a KV260 application include aiinference.json, preprocess.json, drawresult.json, deploy.prototxt, deploy.xmodel, label.json.
@@ -526,7 +526,7 @@ source ~/.profile
 Verify after configuration is complete
 Enter ffmpeg and the following image appears.
 
-![step](img/22.jpg)
+![step](img/22.png)
 
 Then convert the video in MP4 format to video in H264 format, enter the command as follows;
 --
@@ -548,10 +548,10 @@ The input command to run the Campus-WalkerCam application on the KV260 is as fol
 --
 sudo smartcam --mipi -W 1920 -H 1080 -r 30 -t dp –a Campus-WalkerCam
 --
-![step](img/23.jpg)
+![step](img/23.png)
 
 demo 
-![step](img/24.jpg)
+![step](img/24.png)
 Demo video link: https://www.bilibili.com/video/BV1rY4y1v7jK/
 Code
 	Github 
