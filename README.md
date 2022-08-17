@@ -7,6 +7,9 @@ Campus-WalkerCam: Multi-object Detection System
 * Team: AMD_SummerSchool2022 of 7th team
 * University: Shaanxi University of Science ＆ Technology
 * Participated Adaptive Computing Challenge 2021
+* Demo video link:  https://www.bilibili.com/video/BV1rY4y1v7jK/ 
+* Code Github:  https://github.com/calvinee/Campus-WalkerCam
+* website : https://www.hackster.io/JingerZeng/campus-walkercam-multi-object-detection-system-2905a6
 
 Campus-WalkerCam:  Multi-object Detection System based on YOLOv3 on KV260
 
@@ -583,7 +586,4 @@ demo
 
 ![step](img/24.png)
 
-Demo video link: https://www.bilibili.com/video/BV1rY4y1v7jK/
-Code
-	Github 
-https://github.com/calvinee/Campus-WalkerCam
+
