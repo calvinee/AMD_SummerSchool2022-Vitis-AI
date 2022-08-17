@@ -6,7 +6,7 @@ Campus-WalkerCam: Multi-object Detection System
 * Chinese name: 时凯胜，任昊
 * Team: AMD_SummerSchool2022 of 7th team
 * University: Shaanxi University of Science ＆ Technology
-
+* Participated Adaptive Computing Challenge 2021
 
 Campus-WalkerCam:  Multi-object Detection System based on YOLOv3 on KV260
 
